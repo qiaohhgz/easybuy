@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr 
+	http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd
+	">
+
+	<dwr:controller id="dwrController" debug="true" />
+
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/engine.js">dwrController</prop>
+				<prop key="/util.js">dwrController</prop>
+				<prop key="/interface/**">dwrController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<dwr:configuration>
+
+		<dwr:convert class="java.util.Map" type="map" />
+		<dwr:convert class="java.util.List" type="bean" />
+		<dwr:convert type="exception" class="java.lang.Exception"
+			javascript="exception">
+			<dwr:include method="message" />
+			<dwr:include method="lineNumber" />
+		</dwr:convert>
+
+		<dwr:convert class="com.bean.*" type="bean" />
+
+	</dwr:configuration>
+
+	<bean id="categoryManager" class="com.pres.CategoryPresManager">
+		<property name="categoryFacade" ref="categoryFacade" />
+		<dwr:remote javascript="jCategory">
+			<dwr:include method="getCategroy" />
+		</dwr:remote>
+	</bean>
+
+	<bean id="newsManager" class="com.pres.NewsPresManager" >
+		<property name="newsFacade" ref="newsFacade" />
+		<dwr:remote javascript="jNews"></dwr:remote>
+	</bean>
+
+	<bean id="usersManager" class="com.pres.UsersPresManager" >
+		<property name="usersFacade" ref="usersFacade" />
+		<dwr:remote javascript="jUsers"></dwr:remote>
+	</bean>
+</beans>

@@ -1,0 +1,4 @@
+insert into News (newsId, content, createOn, isDisabled, title) values (1, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", now(), 0, "aaaaa");
+insert into News (newsId, content, createOn, isDisabled, title) values (2, "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", now(), 0, "bbbbb");
+insert into News (newsId, content, createOn, isDisabled, title) values (3, "cccccccccccccccccccccccccccccccccccccccccccccccccccccccc", now(), 0, "ccccc");
+insert into News (newsId, content, createOn, isDisabled, title) values (4, "dddddddddddddddddddddddddddddddddddddddddddddddddddddddd", now(), 0, "ddddd");
